@@ -47,6 +47,7 @@ type Repository interface {
 	ObtenerProducto(id int) (Producto, error)
 	ListarProductos() []Producto
 	RegistrarPedido(pedido Pedido) error
+	ListarPedidos() []Pedido
 }
 
 // ===================== REPOMEMORIA =====================
