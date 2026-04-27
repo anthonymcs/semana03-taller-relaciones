@@ -57,6 +57,54 @@ type RepoMemoria struct {
 	pedidos   []Pedido
 }
 
+// ===================== METODOS =====================
+func (r *RepoMemoria) GuardarCliente(cliente Cliente) error {
+	r.clientes = append(r.clientes, cliente)
+	return nil
+}
+
+func (r *RepoMemoria) ObtenerCliente(id int) (Cliente, error) {
+	for _, c := range r.clientes {
+		if c.ID == id {
+			return c, nil
+		}
+	}
+	return Cliente{}, ErrClienteNoEncontrado
+}
+
+func (r *RepoMemoria) ListarClientes() []Cliente {
+	return r.clientes
+}
+
 func NewRepoMemoria() *RepoMemoria {
 	return &RepoMemoria{}
 }
+
+func (r *RepoMemoria) GuardarProducto(producto Producto) error {
+	r.productos = append(r.productos, producto)
+	return nil
+}
+
+func (r *RepoMemoria) ObtenerProducto(id int) (Producto, error) {
+	for _, p := range r.productos {
+		if p.ID == id {
+			return p, nil
+		}
+	}
+	return Producto{}, ErrProductoNoEncontrado
+}
+
+func (r *RepoMemoria) ListarProductos() []Producto {
+	return r.productos
+}
+
+func (r *RepoMemoria) RegistrarPedido(pedido Pedido) error {
+	r.pedidos = append(r.pedidos, pedido)
+	return nil
+}
+
+func (r *RepoMemoria) ListarPedidos() []Pedido {
+	return r.pedidos
+}
+
+var _ Repository = (*RepoMemoria)(nil)
