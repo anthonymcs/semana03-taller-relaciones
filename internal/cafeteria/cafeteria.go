@@ -36,3 +36,27 @@ type Pedido struct {
 	Total    float64
 	Fecha    string
 }
+
+// ===================== REPOSITORIOS =====================
+
+type Repository interface {
+	GuardarCliente(cliente Cliente) error
+	ObtenerCliente(id int) (Cliente, error)
+	ListarClientes() []Cliente
+	GuardarProducto(producto Producto) error
+	ObtenerProducto(id int) (Producto, error)
+	ListarProductos() []Producto
+	RegistrarPedido(pedido Pedido) error
+}
+
+// ===================== REPOMEMORIA =====================
+
+type RepoMemoria struct {
+	clientes  []Cliente
+	productos []Producto
+	pedidos   []Pedido
+}
+
+func NewRepoMemoria() *RepoMemoria {
+	return &RepoMemoria{}
+}
